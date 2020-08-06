@@ -41,10 +41,7 @@
     <main id="main-blog">
       <div class="container"></div>
     </main>
-    <footer id="blog__actions">
-      <div class="field"><button class="btn">Edit</button></div>
-      <div class="field"><button class="btn red">delete</button></div>
-    </footer>
+    <footer id="blog__actions"></footer>
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
@@ -55,6 +52,7 @@
       const db = firebase.firestore();
       const postId = location.href.split("?id=")[1];
       const postDetails = document.querySelector("#main-blog .container");
+      const blogActions = document.querySelector("#blog__actions");
       const blogHero = document.querySelector("#blog-hero .hero");
       const loader = document.querySelector(".loading");
 
@@ -64,7 +62,6 @@
         .then((doc) => {
           if (doc.exists) {
             const data = doc.data();
-            console.log(data);
             blogHero.src = data.image;
             postDetails.innerHTML = `<h2 class="main-blog__title">
               ${data.title}
@@ -79,11 +76,27 @@
             <p>
               ${data.body}
             </p>`;
+            if (data.authorUid === globalUser.uid) {
+              blogActions.innerHTML = `<div class="field"><button class="btn">Edit</button></div>
+                <div class="field">
+                  <button class="btn red" onclick="deletePost()">delete</button>
+                </div>`;
+            }
             setTimeout(() => loader.classList.add("hide"), 1000);
           } else {
             location.href = "/pages/home.html";
           }
         });
+      function deletePost() {
+        db.collection("posts")
+          .doc(postId)
+          .delete()
+          .then(() => {
+            console.log("Document successfully deleted!");
+            window.location.href = "/pages/home.html";
+          })
+          .catch(console.log);
+      }
     </script>
   </body>
 </html>

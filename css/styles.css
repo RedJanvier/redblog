@@ -151,10 +151,10 @@ img {
 }
 .blog__owner {
   border-radius: 50%;
-  height: 100px;
-  width: 100px;
+  height: 70px;
+  width: 70px;
   background: #f7f7f7;
-  margin-top: -50px;
+  margin-top: -35px;
   margin-left: 50%;
   transform: translateX(-50%);
   overflow: hidden;

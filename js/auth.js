@@ -8,7 +8,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   auth.onAuthStateChanged((user) => {
     if (user) {
-      const localVal = localStorage.getItem("user");
+      const localVal = JSON.parse(localStorage.getItem("user"));
       if (localVal) return (globalUser = localVal);
       const { email } = user;
       const { email: mail, displayName, uid } = auth.currentUser;
