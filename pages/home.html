@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Home page of the RedBlog site" />
     <meta name="author" content="RedJanvier" />
+    <link rel="stylesheet" href="../css/loader.css" />
     <link rel="stylesheet" href="../css/styles.css" />
     <link
       rel="stylesheet"
@@ -15,6 +16,14 @@
     <title>Home</title>
   </head>
   <body>
+    <div class="loading">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
     <div class="container">
       <nav class="navbar">
         <div class="navbar__logo"><h1>Redblog</h1></div>
@@ -45,13 +54,15 @@
       window.addEventListener("DOMContentLoaded", () => {
         const db = firebase.firestore();
         const blogposts = [];
+        const loader = document.querySelector(".loading");
+
         db.collection("posts").onSnapshot((snapshot) => {
           snapshot.forEach((doc) => {
             blogposts.push({ ...doc.data(), id: doc.id });
           });
           renderPosts(blogposts);
+          setTimeout(() => loader.classList.add("hide"), 1000);
         });
-        // .then(() => );
       });
       function renderPosts(posts) {
         const blogList = document.querySelector(".my-blogs");

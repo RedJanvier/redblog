@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Blog view page of the RedBlog site" />
     <meta name="author" content="RedJanvier" />
+    <link rel="stylesheet" href="../css/loader.css" />
     <link rel="stylesheet" href="../css/styles.css" />
     <link
       rel="stylesheet"
@@ -15,6 +16,14 @@
     <title>Blog View</title>
   </head>
   <body>
+    <div class="loading">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
     <div class="container">
       <nav class="navbar">
         <div class="navbar__logo"><h1>Redblog</h1></div>
@@ -27,43 +36,10 @@
       </nav>
     </div>
     <header id="blog-hero">
-      <img src="../images/pexels-burst-374074.jpg" alt="hero" />
+      <img src="" alt="hero" class="hero" />
     </header>
     <main id="main-blog">
-      <div class="container">
-        <h2 class="main-blog__title">
-          How did Van Gogh's Turbulent mind depict one of the most complex
-          concept in Physics?
-        </h2>
-        <div class="main-blog__author">
-          <em>By RedJanvier</em>
-          <img
-            src="https://randomuser.me/api/portraits/men/32.jpg"
-            alt="author-profile"
-          />
-        </div>
-        <p>
-          Contrary to popular belief, Lorem Ipsum is not simply random text. It
-          has roots in a piece of classical Latin literature from 45 BC, making
-          it over 2000 years old. Richard McClintock, a Latin professor at
-          Hampden-Sydney College in Virginia, looked up one of the more obscure
-          Latin words, consectetur, from a Lorem Ipsum passage, and going
-          through the cites of the word in classical literature, discovered the
-          undoubtable source. Lorem Ipsum comes from sections 1.10.32 and
-          1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and
-          Evil) by Cicero, written in 45 BC. This book is a treatise on the
-          theory of ethics, very popular during the Renaissance. The first line
-          of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in
-          section 1.10.32.
-        </p>
-        <p>
-          standard chunk of Lorem Ipsum used since the 1500s is reproduced below
-          for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus
-          Bonorum et Malorum" by Cicero are also reproduced in their exact
-          original form, accompanied by English versions from the 1914
-          translation by H. Rackham.
-        </p>
-      </div>
+      <div class="container"></div>
     </main>
     <footer id="blog__actions">
       <div class="field"><button class="btn">Edit</button></div>
@@ -71,8 +47,43 @@
     </footer>
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
     <script src="../js/init.js"></script>
     <script src="../js/auth.js"></script>
+    <script>
+      const db = firebase.firestore();
+      const postId = location.href.split("?id=")[1];
+      const postDetails = document.querySelector("#main-blog .container");
+      const blogHero = document.querySelector("#blog-hero .hero");
+      const loader = document.querySelector(".loading");
+
+      db.collection("posts")
+        .doc(postId)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            const data = doc.data();
+            console.log(data);
+            blogHero.src = data.image;
+            postDetails.innerHTML = `<h2 class="main-blog__title">
+              ${data.title}
+            </h2>
+            <div class="main-blog__author">
+              <em>${data.authorName}</em>
+              <img
+                src="${data.authorProfile}"
+                alt="author-profile"
+              />
+            </div>
+            <p>
+              ${data.body}
+            </p>`;
+            setTimeout(() => loader.classList.add("hide"), 1000);
+          } else {
+            location.href = "/pages/home.html";
+          }
+        });
+    </script>
   </body>
 </html>
