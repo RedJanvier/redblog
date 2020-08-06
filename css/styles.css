@@ -48,6 +48,9 @@ img {
 .red {
   background: rgb(219, 105, 105);
 }
+.hide {
+  display: none;
+}
 
 /* LOGIN PAGE */
 
@@ -74,7 +77,6 @@ img {
   margin: 2rem 0;
 }
 .login-form__error {
-  display: none;
   margin: 1rem 0;
   font-size: 12px;
   color: crimson;
@@ -102,6 +104,7 @@ img {
 .navbar__links {
   display: flex;
   list-style: none;
+  align-items: center;
 }
 .navbar__links li {
   padding: 0 1rem;

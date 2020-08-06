@@ -17,25 +17,92 @@
   <body>
     <main class="main-login">
       <form class="login-form">
-        <div class="login-form__error">
+        <div class="login-form__error hide">
           <p>Wrong Credentials</p>
         </div>
         <div class="login-form__field">
-          <input type="email" placeholder="Email" />
+          <input type="email" name="email" placeholder="Email" />
         </div>
         <div class="login-form__field">
-          <input type="password" placeholder="Password" />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            pattern="[A-Za-z0,.?/!@#$%^&*()-=_+]{8,}"
+          />
         </div>
         <div class="login-form__field">
           <button class="btn" type="submit">Login</button>
         </div>
         <hr />
         <div class="login-form__field">
-          <button class="btn blue" type="submit">
+          <button class="btn blue" type="button" onclick="googleLogin()">
             <i class="fa fa-google"></i> Login
           </button>
         </div>
       </form>
     </main>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
+    <script src="./js/init.js"></script>
+
+    <script>
+      const loginForm = document.querySelector(".login-form");
+      const loginError = document.querySelector(".login-form__error");
+
+      window.addEventListener("DOMContentLoaded", () => {
+        auth.onAuthStateChanged((user) => {
+          if (user) {
+            const { email } = user;
+            console.log(
+              `${email} just logged in. Enjoy the best blog ever....`
+            );
+            window.location.href = "/pages/home.html";
+          }
+        });
+        loginForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          auth
+            .signInWithEmailAndPassword(
+              loginForm.email.value.trim(),
+              loginForm.password.value.trim()
+            )
+            .catch((err) => {
+              let message;
+              switch (err.code) {
+                case "auth/invalid-email":
+                case "auth/user-not-found":
+                case "auth/wrong-password":
+                  message = "Wrong credentials";
+                  break;
+                default:
+                  message = err.message;
+              }
+              showError(message);
+            });
+        });
+      });
+      function showError(msg, time = 4) {
+        loginError.innerHTML = `<p>${msg}</p>`;
+        loginError.classList.remove("hide");
+        setTimeout(() => loginError.classList.add("hide"), time * 1000);
+      }
+      function googleLogin() {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase
+          .auth()
+          .signInWithPopup(provider)
+          .then((result) => {
+            console.log("res", result);
+            localStorage.setItem("user", JSON.stringify(result.user));
+            console.log("logged in as: ", result.user.displayName, result.user);
+          })
+          .catch((err) => {
+            console.log(err);
+            showError(err.message);
+          });
+      }
+    </script>
   </body>
 </html>
