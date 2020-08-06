@@ -8,6 +8,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
   auth.onAuthStateChanged((user) => {
     if (user) {
+      const localVal = localStorage.getItem("user");
+      if (localVal) return (globalUser = localVal);
       const { email } = user;
       const { email: mail, displayName, uid } = auth.currentUser;
       console.log(`${email} just logged in. Enjoy the best blog ever....`);
@@ -20,5 +22,9 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  logoutBtn.addEventListener("click", () => auth.signOut().catch(console.log));
+  logoutBtn.addEventListener("click", () => {
+    disableButton(logoutBtn);
+    localStorage.clear();
+    auth.signOut().catch(console.log);
+  });
 });

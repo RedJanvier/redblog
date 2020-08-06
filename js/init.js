@@ -11,3 +11,9 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 const auth = firebase.auth();
+function disableButton(btn) {
+  return (btn.disabled = "disabled");
+}
+function enableButton(btn) {
+  return (btn.disabled = "");
+}

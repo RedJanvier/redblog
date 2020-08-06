@@ -16,14 +16,14 @@
   </head>
   <body>
     <main class="main-login">
-      <form class="login-form">
-        <div class="login-form__error hide">
+      <form class="form login-form">
+        <div class="form__error hide">
           <p>Wrong Credentials</p>
         </div>
-        <div class="login-form__field">
+        <div class="form__field">
           <input type="email" name="email" placeholder="Email" />
         </div>
-        <div class="login-form__field">
+        <div class="form__field">
           <input
             type="password"
             name="password"
@@ -31,12 +31,17 @@
             pattern="[A-Za-z0,.?/!@#$%^&*()-=_+]{8,}"
           />
         </div>
-        <div class="login-form__field">
-          <button class="btn" type="submit">Login</button>
+        <div class="form__field">
+          <button class="btn" name="mail" type="submit">Login</button>
         </div>
         <hr />
-        <div class="login-form__field">
-          <button class="btn blue" type="button" onclick="googleLogin()">
+        <div class="form__field">
+          <button
+            class="btn blue"
+            name="google"
+            type="button"
+            onclick="googleLogin()"
+          >
             <i class="fa fa-google"></i> Login
           </button>
         </div>
@@ -49,7 +54,7 @@
 
     <script>
       const loginForm = document.querySelector(".login-form");
-      const loginError = document.querySelector(".login-form__error");
+      const loginError = document.querySelector(".form__error");
 
       window.addEventListener("DOMContentLoaded", () => {
         auth.onAuthStateChanged((user) => {
@@ -58,18 +63,23 @@
             console.log(
               `${email} just logged in. Enjoy the best blog ever....`
             );
+            localStorage.setItem("user", JSON.stringify(user));
             window.location.href = "/pages/home.html";
           }
         });
         loginForm.addEventListener("submit", (e) => {
           e.preventDefault();
+          disableButton(loginForm.mail);
+          disableButton(loginForm.google);
           auth
             .signInWithEmailAndPassword(
               loginForm.email.value.trim(),
               loginForm.password.value.trim()
             )
             .catch((err) => {
+              console.log(err);
               let message;
+              let time = undefined;
               switch (err.code) {
                 case "auth/invalid-email":
                 case "auth/user-not-found":
@@ -87,8 +97,12 @@
         loginError.innerHTML = `<p>${msg}</p>`;
         loginError.classList.remove("hide");
         setTimeout(() => loginError.classList.add("hide"), time * 1000);
+        enableButton(loginForm.mail);
+        enableButton(loginForm.google);
       }
       function googleLogin() {
+        disableButton(loginForm.mail);
+        disableButton(loginForm.google);
         const provider = new firebase.auth.GoogleAuthProvider();
         firebase
           .auth()
