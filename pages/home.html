@@ -32,176 +32,62 @@
     <main id="main-blogs">
       <div class="container">
         <h2 class="section-title">Blogs</h2>
-        <div class="my-blogs">
-          <a href="/pages/blog.html?id=1" class="blog">
-            <div class="blog__header">
-              <img
-                src="../images/pexels-alex-andrews-821653.jpg"
-                alt="profile"
-              />
-            </div>
-            <div class="blog__owner">
-              <img
-                src="https://randomuser.me/api/portraits/men/32.jpg"
-                alt="profile"
-              />
-            </div>
-            <div class="blog__body">
-              <h4>
-                How did Van Gogh's Turbulent mind depict one of the most complex
-                concept in Physics?
-              </h4>
-            </div>
-            <div class="blog__footer">
-              <ul class="actions">
-                <li class="likes"><i class="fa fa-heart"></i>57</li>
-                <li class="comments"><i class="fa fa-comment"></i>6</li>
-                <li class="views"><i class="fa fa-eye"></i>136</li>
-              </ul>
-            </div>
-          </a>
-          <a href="/pages/blog.html?id=2" class="blog">
-            <div class="blog__header">
-              <img
-                src="../images/pexels-anna-tarazevich-4927362.jpg"
-                alt="profile"
-              />
-            </div>
-            <div class="blog__owner">
-              <img
-                src="https://randomuser.me/api/portraits/men/32.jpg"
-                alt="profile"
-              />
-            </div>
-            <div class="blog__body">
-              <h4>
-                How did Van Gogh's Turbulent mind depict one of the most complex
-                concept in Physics?
-              </h4>
-            </div>
-            <div class="blog__footer">
-              <ul class="actions">
-                <li class="likes"><i class="fa fa-heart"></i>57</li>
-                <li class="comments"><i class="fa fa-comment"></i>6</li>
-                <li class="views"><i class="fa fa-eye"></i>136</li>
-              </ul>
-            </div>
-          </a>
-          <a href="/pages/blog.html?id=3" class="blog">
-            <div class="blog__header">
-              <img
-                src="../images/pexels-jack-redgate-3014019.jpg"
-                alt="profile"
-              />
-            </div>
-            <div class="blog__owner">
-              <img
-                src="https://randomuser.me/api/portraits/men/1.jpg"
-                alt="profile"
-              />
-            </div>
-            <div class="blog__body">
-              <h4>
-                How did Van Gogh's Turbulent mind depict one of the most complex
-                concept in Physics?
-              </h4>
-            </div>
-            <div class="blog__footer">
-              <ul class="actions">
-                <li class="likes"><i class="fa fa-heart"></i>57</li>
-                <li class="comments"><i class="fa fa-comment"></i>6</li>
-                <li class="views"><i class="fa fa-eye"></i>136</li>
-              </ul>
-            </div>
-          </a>
-          <a href="/pages/blog.html?id=4" class="blog">
-            <div class="blog__header">
-              <img
-                src="../images/pexels-lisa-fotios-4435346.jpg"
-                alt="profile"
-              />
-            </div>
-            <div class="blog__owner">
-              <img
-                src="https://randomuser.me/api/portraits/men/43.jpg"
-                alt="profile"
-              />
-            </div>
-            <div class="blog__body">
-              <h4>
-                How did Van Gogh's Turbulent mind depict one of the most complex
-                concept in Physics?
-              </h4>
-            </div>
-            <div class="blog__footer">
-              <ul class="actions">
-                <li class="likes"><i class="fa fa-heart"></i>57</li>
-                <li class="comments"><i class="fa fa-comment"></i>6</li>
-                <li class="views"><i class="fa fa-eye"></i>136</li>
-              </ul>
-            </div>
-          </a>
-          <a href="/pages/blog.html?id=5" class="blog">
-            <div class="blog__header">
-              <img
-                src="../images/pexels-anna-tarazevich-4927362.jpg"
-                alt="profile"
-              />
-            </div>
-            <div class="blog__owner">
-              <img
-                src="https://randomuser.me/api/portraits/men/1.jpg"
-                alt="profile"
-              />
-            </div>
-            <div class="blog__body">
-              <h4>
-                How did Van Gogh's Turbulent mind depict one of the most complex
-                concept in Physics?
-              </h4>
-            </div>
-            <div class="blog__footer">
-              <ul class="actions">
-                <li class="likes"><i class="fa fa-heart"></i>57</li>
-                <li class="comments"><i class="fa fa-comment"></i>6</li>
-                <li class="views"><i class="fa fa-eye"></i>136</li>
-              </ul>
-            </div>
-          </a>
-          <a href="/pages/blog.html?id=6" class="blog">
-            <div class="blog__header">
-              <img
-                src="../images/pexels-alex-andrews-821653.jpg"
-                alt="profile"
-              />
-            </div>
-            <div class="blog__owner">
-              <img
-                src="https://randomuser.me/api/portraits/men/1.jpg"
-                alt="profile"
-              />
-            </div>
-            <div class="blog__body">
-              <h4>
-                How did Van Gogh's Turbulent mind depict one of the most complex
-                concept in Physics?
-              </h4>
-            </div>
-            <div class="blog__footer">
-              <ul class="actions">
-                <li class="likes"><i class="fa fa-heart"></i>57</li>
-                <li class="comments"><i class="fa fa-comment"></i>6</li>
-                <li class="views"><i class="fa fa-eye"></i>136</li>
-              </ul>
-            </div>
-          </a>
-        </div>
+        <div class="my-blogs"></div>
       </div>
     </main>
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
     <script src="../js/init.js"></script>
     <script src="../js/auth.js"></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const db = firebase.firestore();
+        const blogposts = [];
+        db.collection("posts").onSnapshot((snapshot) => {
+          snapshot.forEach((doc) => {
+            blogposts.push({ ...doc.data(), id: doc.id });
+          });
+          renderPosts(blogposts);
+        });
+        // .then(() => );
+      });
+      function renderPosts(posts) {
+        const blogList = document.querySelector(".my-blogs");
+        const html = posts
+          .map(
+            (post) => `<a href="/pages/blog.html?id=${post.id}" class="blog">
+            <div class="blog__header">
+              <img
+                src="${post.image}"
+                alt="profile"
+              />
+            </div>
+            <div class="blog__owner">
+              <img
+                src="${post.authorProfile}"
+                alt="profile"
+              />
+            </div>
+            <div class="blog__body">
+              <h4>
+                ${post.title}
+              </h4>
+            </div>
+            <div class="blog__footer">
+              <ul class="actions">
+                <li class="likes"><i class="fa fa-heart"></i>57</li>
+                <li class="comments"><i class="fa fa-comment"></i>6</li>
+                <li class="views"><i class="fa fa-eye"></i>136</li>
+              </ul>
+            </div>
+          </a>`
+          )
+          .join("");
+
+        blogList.innerHTML = html;
+      }
+    </script>
   </body>
 </html>
