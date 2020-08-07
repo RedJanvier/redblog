@@ -85,11 +85,11 @@
             }
             setTimeout(() => loader.classList.add("hide"), 1000);
           } else {
-            location.href = "/pages/home.html";
+            redirectTo("/pages/home.html");
           }
         });
       function editPost() {
-        window.location.href = `/pages/edit.html?id=${postId}`;
+        redirectTo(`/pages/edit.html?id=${postId}`);
       }
       function deletePost() {
         db.collection("posts")
@@ -97,7 +97,7 @@
           .delete()
           .then(() => {
             console.log("Document successfully deleted!");
-            window.location.href = "/pages/home.html";
+            redirectTo("/pages/home.html");
           })
           .catch(console.log);
       }
