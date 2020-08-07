@@ -68,7 +68,9 @@
         const blogList = document.querySelector(".my-blogs");
         const html = posts
           .map(
-            (post) => `<a href="/pages/blog.html?id=${post.id}" class="blog">
+            (
+              post
+            ) => `<a href="/redblog/pages/blog.html?id=${post.id}" class="blog">
             <div class="blog__header">
               <img
                 src="${post.image}"

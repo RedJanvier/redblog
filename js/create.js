@@ -34,7 +34,7 @@ createForm.addEventListener("submit", (e) => {
         case "storage/unauthorized":
           localStorage.clear();
           auth.signOut().catch(console.log);
-          window.location.href = "/";
+          redirectTo("/");
           break;
       }
     },
@@ -56,7 +56,7 @@ createForm.addEventListener("submit", (e) => {
           .add(blogData)
           .then((docRef) => {
             console.log("Document written with ID: ", docRef.id);
-            setTimeout(() => (window.location.href = "/pages/home.html"), 800);
+            setTimeout(() => redirectTo("/pages/home.html"), 800);
           })
           .catch(console.log);
       });
