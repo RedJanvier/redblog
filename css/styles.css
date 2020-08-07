@@ -34,6 +34,10 @@ a:hover {
 .btn:hover {
   opacity: 0.9;
 }
+.btn:active {
+  opacity: 0.9;
+  background: rgb(129, 231, 129);
+}
 .section-title {
   padding: 4rem 0;
   text-align: center;
@@ -88,6 +92,12 @@ img {
   color: crimson;
   text-align: center;
   transition: 1s all ease-in-out;
+}
+.form__field input:focus,
+.form__field input:hover,
+.form__field textarea:hover,
+.form__field textarea:focus {
+  border: 1px solid #999;
 }
 .form__field input,
 .form__field textarea {
