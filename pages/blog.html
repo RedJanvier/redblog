@@ -62,6 +62,7 @@
         .then((doc) => {
           if (doc.exists) {
             const data = doc.data();
+            localStorage.setItem(postId, JSON.stringify(data));
             blogHero.src = data.image;
             postDetails.innerHTML = `<h2 class="main-blog__title">
               ${data.title}
@@ -77,7 +78,7 @@
               ${data.body}
             </p>`;
             if (data.authorUid === globalUser.uid) {
-              blogActions.innerHTML = `<div class="field"><button class="btn">Edit</button></div>
+              blogActions.innerHTML = `<div class="field" onclick="editPost()"><button class="btn">Edit</button></div>
                 <div class="field">
                   <button class="btn red" onclick="deletePost()">delete</button>
                 </div>`;
@@ -87,6 +88,9 @@
             location.href = "/pages/home.html";
           }
         });
+      function editPost() {
+        window.location.href = `/pages/edit.html?id=${postId}`;
+      }
       function deletePost() {
         db.collection("posts")
           .doc(postId)
