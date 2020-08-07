@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Create new blog page for the RedBlog site"
+    />
+    <meta name="author" content="RedJanvier" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <title>Create New Blogpost</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar">
+        <div class="navbar__logo"><h1>Redblog</h1></div>
+        <ul class="navbar__links">
+          <li><a href="./home.html">Home</a></li>
+          <li><a href="./home.html#main-blogs">Blog</a></li>
+          <li><a href="#" class="active">Create</a></li>
+          <li><button class="btn" id="logout-btn">Logout</button></li>
+        </ul>
+      </nav>
+    </div>
+    <main id="main-blog">
+      <div class="container">
+        <h2 class="section-title">New Blog Post</h2>
+        <form class="form create-form">
+          <div class="form__field">
+            <input type="text" name="title" placeholder="Blog Title" required />
+          </div>
+          <div class="form__field">
+            <textarea name="body" placeholder="Blog Body" id="body"></textarea>
+          </div>
+          <div class="form__field">
+            <input
+              type="file"
+              name="image"
+              required
+              placeholder="Blog Image"
+              accept="image/x-png,image/x-jpeg"
+            />
+          </div>
+          <div class="form__field img-preview"></div>
+          <div class="form__field">
+            <button class="btn" type="submit" name="submit">Create Post</button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
+    <script src="../js/init.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/create.js"></script>
+  </body>
+</html>

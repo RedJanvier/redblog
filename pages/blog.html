@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Blog view page of the RedBlog site" />
+    <meta name="author" content="RedJanvier" />
+    <link rel="stylesheet" href="../css/loader.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <title>Blog View</title>
+  </head>
+  <body>
+    <div class="loading">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <div class="container">
+      <nav class="navbar">
+        <div class="navbar__logo"><h1>Redblog</h1></div>
+        <ul class="navbar__links">
+          <li><a href="./home.html">Home</a></li>
+          <li><a href="./home.html#main-blogs" class="active">Blog</a></li>
+          <li><a href="./create.html">Create</a></li>
+          <li><button class="btn" id="logout-btn">Logout</button></li>
+        </ul>
+      </nav>
+    </div>
+    <header id="blog-hero">
+      <img src="" alt="hero" class="hero" />
+    </header>
+    <main id="main-blog">
+      <div class="container"></div>
+    </main>
+    <footer id="blog__actions"></footer>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
+    <script src="../js/init.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+      const db = firebase.firestore();
+      const postId = location.href.split("?id=")[1];
+      const postDetails = document.querySelector("#main-blog .container");
+      const blogActions = document.querySelector("#blog__actions");
+      const blogHero = document.querySelector("#blog-hero .hero");
+      const loader = document.querySelector(".loading");
+
+      db.collection("posts")
+        .doc(postId)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            const data = doc.data();
+            localStorage.setItem(postId, JSON.stringify(data));
+            blogHero.src = data.image;
+            postDetails.innerHTML = `<h2 class="main-blog__title">
+              ${data.title}
+            </h2>
+            <div class="main-blog__author">
+              <em>${data.authorName}</em>
+              <img
+                src="${data.authorProfile}"
+                alt="author-profile"
+              />
+            </div>
+            <p>
+              ${data.body}
+            </p>`;
+            if (data.authorUid === globalUser.uid) {
+              blogActions.innerHTML = `<div class="field" onclick="editPost()"><button class="btn">Edit</button></div>
+                <div class="field">
+                  <button class="btn red" onclick="deletePost()">delete</button>
+                </div>`;
+            }
+            setTimeout(() => loader.classList.add("hide"), 1000);
+          } else {
+            location.href = "/pages/home.html";
+          }
+        });
+      function editPost() {
+        window.location.href = `/pages/edit.html?id=${postId}`;
+      }
+      function deletePost() {
+        db.collection("posts")
+          .doc(postId)
+          .delete()
+          .then(() => {
+            console.log("Document successfully deleted!");
+            window.location.href = "/pages/home.html";
+          })
+          .catch(console.log);
+      }
+    </script>
+  </body>
+</html>
