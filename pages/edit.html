@@ -125,7 +125,7 @@
               case "storage/unauthorized":
                 localStorage.clear();
                 auth.signOut().catch(console.log);
-                window.location.href = "/";
+                redirectTo("/");
                 break;
             }
           },
@@ -162,9 +162,7 @@
         db.collection("posts")
           .doc(postId)
           .update(blogData)
-          .then(() =>
-            setTimeout(() => (window.location.href = "/pages/home.html"), 800)
-          )
+          .then(() => setTimeout(() => redirectTo("/pages/home.html"), 800))
           .catch(console.log);
       }
 

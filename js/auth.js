@@ -18,7 +18,7 @@ window.addEventListener("DOMContentLoaded", () => {
       globalUser.name = displayName;
       globalUser.uid = uid;
     } else {
-      window.location.href = "/";
+      redirectTo("/");
     }
   });
 
