@@ -17,3 +17,8 @@ function disableButton(btn) {
 function enableButton(btn) {
   return (btn.disabled = "");
 }
+function redirectTo(path) {
+  return (location.href = location.href.includes("github")
+    ? `/redblog${path}`
+    : path);
+}

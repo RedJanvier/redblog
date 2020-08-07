@@ -64,7 +64,7 @@
               `${email} just logged in. Enjoy the best blog ever....`
             );
             localStorage.setItem("user", JSON.stringify(user));
-            window.location.href = "/pages/home.html";
+            redirectTo("/pages/home.html");
           }
         });
         loginForm.addEventListener("submit", (e) => {
